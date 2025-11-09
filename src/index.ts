@@ -11,7 +11,6 @@ import morgan from "morgan";
 // import { dbConnection } from "./database";
 import { errorHandler } from "./middleware/errorHandler";
 import routes from "./routes";
-// import { redisConnection } from "./redis";
 
 export const app = express();
 
@@ -36,27 +35,7 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get('/widget.js', (req, res) => {
-  console.log('....widget.js....');
-  const frontendUrl = process.env.FRONTEND_URL || '';
-  const serverUrl = process.env.SERVER_URL || '';
 
-  fs.readFile(__dirname + '/static/widget.js', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading widget.js:', err);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-
-    // Replace the placeholder with the actual FRONTEND_URL
-    let updatedScript = data.replace('{{FRONTEND_URL}}', frontendUrl);
-    updatedScript = updatedScript.replace('{{API_BASE_URL}}', serverUrl);
-
-    // Set appropriate headers and send the script
-    res.setHeader('Content-Type', 'application/javascript');
-    res.send(updatedScript);
-  });
-});
 
 app.use("/", routes);
 
@@ -67,13 +46,4 @@ if (process.env.NODE_ENV !== "test") {
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
-
-  // (async () => {
-  //   console.log("Connecting to database...");
-  //   await dbConnection();
-  // })();
-  // (async () => {
-  //   console.log("Connecting to redis...");
-  //   await redisConnection();
-  // })();
 }
