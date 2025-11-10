@@ -122,6 +122,11 @@ Example response:
 }
 ```
 
+
+## Sample Data
+
+User data is stored in `src/data/users.json`. The original dataset was downloaded from [Kaggle: okcupid-profiles](https://www.kaggle.com/datasets/andrewmvd/okcupid-profiles) and has been cleaned and customized for the Maxion use case.
+
 ## Future Improvements
 
 - Add a database and authentication
