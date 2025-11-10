@@ -1,8 +1,7 @@
 import { Router } from "express";
-import testRoutes from "./test";
+import matchesRoutes from "./matches";
 
 const router = Router();
 
-router.use("/test", testRoutes);
-
+router.use("/matches", matchesRoutes);
 export default router;
