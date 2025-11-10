@@ -46,6 +46,7 @@ curl http://localhost:4000/matches/10
 
 ## Folder Structure
 
+> ```
 > maxion-test/
 > ├── babel.config.cjs
 > ├── package.json
@@ -75,6 +76,7 @@ curl http://localhost:4000/matches/10
 > │       ├── winston.ts
 > │       └── response/
 > │           └── customError.ts
+> ```
 
 ## Scoring System
 
