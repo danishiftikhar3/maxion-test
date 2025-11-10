@@ -21,11 +21,7 @@ export function scoreAttractiveness(candidate: User) {
   const recencyFactor = Math.max(0, 1 - daysSinceOnline / 30);
 
   // --- weighted composite ---
-  const score =
-    0.35 * likesReceivedRate +
-    0.30 * matchRate +
-    0.20 * dateRate +
-    0.15 * recencyFactor;
+  const score = 0.35 * likesReceivedRate + 0.3 * matchRate + 0.2 * dateRate + 0.15 * recencyFactor;
 
   // --- scale to 0–100 and smooth ---
   const attractivenessScore = Math.round(score * 100);
@@ -39,8 +35,6 @@ export function scoreAttractiveness(candidate: User) {
 
   return {
     attractivenessScore,
-    explanation:
-      summary.join(". ") ||
-      "Moderate engagement; balanced activity and attention."
+    explanation: summary.join(". ") || "Moderate engagement; balanced activity and attention.",
   };
 }

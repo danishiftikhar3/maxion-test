@@ -10,8 +10,7 @@ export function scoreCompatibility(user: User, candidate: User) {
     (user.orientation === "straight" && user.sex !== candidate.sex) ||
     (user.orientation === "gay" && user.sex === candidate.sex) ||
     user.orientation === "bisexual";
-  if (!validPair)
-    return { compatibilityScore: 0, explanation: "Orientation mismatch" };
+  if (!validPair) return { compatibilityScore: 0, explanation: "Orientation mismatch" };
 
   // --- 2. Age alignment (20%) ---
   const [minAge, maxAge] = user.preferred_age_range;
@@ -32,8 +31,7 @@ export function scoreCompatibility(user: User, candidate: User) {
 
   // Distance
   const sameCity =
-    user.location.split(",")[0].trim().toLowerCase() ===
-    candidate.location.split(",")[0].trim().toLowerCase();
+    user.location.split(",")[0].trim().toLowerCase() === candidate.location.split(",")[0].trim().toLowerCase();
   if (user.dealbreakers.distance_limit_km && !sameCity) {
     penalty += 30;
     notes.push(`Different city (${candidate.location})`);
@@ -72,10 +70,10 @@ export function scoreCompatibility(user: User, candidate: User) {
     [candidate.education, user.preferences.education],
     [candidate.religion, user.preferences.religion],
     [candidate.ethnicity, user.preferences.ethnicity],
-    [candidate.drinks, user.preferences.drinks]
+    [candidate.drinks, user.preferences.drinks],
   ];
   const matchedPrefs = prefChecks.filter(([val, allowed]) =>
-    allowed.map(a => a.toLowerCase()).includes(val.toLowerCase())
+    allowed.map((a) => a.toLowerCase()).includes(val.toLowerCase()),
   ).length;
 
   const prefScore = (matchedPrefs / prefChecks.length) * 100;
@@ -84,7 +82,7 @@ export function scoreCompatibility(user: User, candidate: User) {
   if (prefScore > 50) notes.push("Matches stated preferences");
 
   // --- 5. Shared interests (20%) ---
-  const shared = user.interests.filter(i => candidate.interests.includes(i));
+  const shared = user.interests.filter((i) => candidate.interests.includes(i));
   const interestScore = (shared.length / Math.max(user.interests.length, 1)) * 100;
   score += interestScore * 0.2;
   total += 0.2;
@@ -95,7 +93,7 @@ export function scoreCompatibility(user: User, candidate: User) {
     user.diet === candidate.diet,
     user.drinks === candidate.drinks,
     user.education === candidate.education,
-    user.religion === candidate.religion
+    user.religion === candidate.religion,
   ];
   const lifestyleScore = (lifestyleChecks.filter(Boolean).length / lifestyleChecks.length) * 100;
   score += lifestyleScore * 0.1;
@@ -106,8 +104,7 @@ export function scoreCompatibility(user: User, candidate: User) {
   let locScore = 30;
   if (sameCity) locScore = 100;
   else if (
-    user.location.split(",").pop()?.trim().toLowerCase() ===
-    candidate.location.split(",").pop()?.trim().toLowerCase()
+    user.location.split(",").pop()?.trim().toLowerCase() === candidate.location.split(",").pop()?.trim().toLowerCase()
   )
     locScore = 60;
   score += locScore * 0.05;
@@ -118,6 +115,6 @@ export function scoreCompatibility(user: User, candidate: User) {
 
   return {
     compatibilityScore: final,
-    explanation: notes.join(". ") || "No major incompatibilities detected."
+    explanation: notes.join(". ") || "No major incompatibilities detected.",
   };
 }

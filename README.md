@@ -15,11 +15,13 @@ This project is a Node.js + TypeScript REST API that simulates matchmaking logic
    pnpm clean:install
    ```
 3. Copy `.env.sample` to `.env` and set `PORT=4000` (optional):
+
    ```env
    PORT=4000
    ```
 
    If no port is set, defaults to 4000.
+
 4. Start the API:
    ```sh
    pnpm start
@@ -121,7 +123,6 @@ Example response:
   ]
 }
 ```
-
 
 ## Sample Data
 
