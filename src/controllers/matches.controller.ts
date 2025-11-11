@@ -38,21 +38,17 @@ export const findMutualMatches = async (req: Request, res: Response, next: NextF
         const { attractivenessScore } = scoreAttractiveness(candidate);
         const { compatibilityScore, explanation } = scoreCompatibility(user, candidate);
 
-        // combined ranking metric (weight: compatibility 70%, attractiveness 30%)
-        const finalScore = Math.round(compatibilityScore * 0.7 + attractivenessScore * 0.3);
-
         return {
           candidateId: candidate.id,
           compatibilityScore,
           attractivenessScore,
-          finalScore,
           explanation,
         };
       })
       .filter(Boolean);
 
     // 3. Sort top 5
-    const topMatches = results.sort((a, b) => b.finalScore - a.finalScore).slice(0, 5);
+    const topMatches = results.sort((a, b) => b.compatibilityScore - a.compatibilityScore).slice(0, 5);
 
     // 4. Return formatted JSON
     return res.status(200).json({
