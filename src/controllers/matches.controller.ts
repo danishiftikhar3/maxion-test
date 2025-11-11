@@ -31,12 +31,12 @@ export const findMutualMatches = async (req: Request, res: Response, next: NextF
 
     // 2. Compute scores for each match
     const results = mutualMatches
-      .map((cid) => {
-        const candidate = users.find((u) => u.id === cid);
+      .map((candidateId) => {
+        const candidate = users.find((user) => user.id === candidateId);
         if (!candidate) return null;
 
-        const { compatibilityScore, explanation } = scoreCompatibility(user, candidate);
         const { attractivenessScore } = scoreAttractiveness(candidate);
+        const { compatibilityScore, explanation } = scoreCompatibility(user, candidate);
 
         // combined ranking metric (weight: compatibility 70%, attractiveness 30%)
         const finalScore = Math.round(compatibilityScore * 0.7 + attractivenessScore * 0.3);
