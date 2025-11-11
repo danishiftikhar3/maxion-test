@@ -7,24 +7,20 @@ This project is a Node.js + TypeScript REST API that simulates matchmaking logic
 ## How to Run
 
 1. Install pnpm (if not installed):
+
    ```sh
    npm install -g pnpm
    ```
 2. Install dependencies:
+
    ```sh
    pnpm clean:install
    ```
-3. Copy `.env.sample` to `.env` and set `PORT=4000` (optional):
-
-   ```env
-   PORT=4000
-   ```
-
-   If no port is set, defaults to 4000.
-
+3. Make sure node version is v20 +.
 4. Start the API:
+
    ```sh
-   pnpm start
+   pnpm dev
    ```
 5. Visit `http://localhost:4000/matches/2` in a browser or API client (e.g., Postman, HTTPie)
 
