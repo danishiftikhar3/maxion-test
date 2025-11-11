@@ -31,10 +31,6 @@ try {
 }
 app.use(morgan("combined"));
 
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-});
-
 app.use("/", routes);
 
 app.use(errorHandler);
