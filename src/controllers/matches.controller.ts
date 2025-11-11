@@ -10,6 +10,11 @@ export const findMutualMatches = async (req: Request, res: Response, next: NextF
     const userId = parseInt(req.params.userId);
     const users: User[] = usersData as User[];
 
+    if (isNaN(userId)) {
+      const customError = new CustomError(400, "Invalid userId parameter");
+      return next(customError);
+    }
+
     const user = users.find((u) => u.id === userId);
     if (!user) {
       const customError = new CustomError(404, `User ${userId} not found`);
